@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TravelBloom - Recommendations</title>
+    <!-- روابط أيقونات FontAwesome لوسائل التواصل الاجتماعي وأيقونة البحث -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        /* خلفية الصفحة الرئيسية */
+        body {
+            background-image: url('https://images.unsplash.com/photo-1496442226666-8d4d0e62e6e9?q=80&w=1920&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+            height: 100vh;
+            color: #fff;
+        }
+
+        /* شريط التنقل (Task 2) */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #0b2533;
+            padding: 15px 40px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            font-weight: bold;
+            font-size: 20px;
+            color: #fff;
+        }
+
+        .logo i {
+            margin-right: 10px;
+            color: #00bcd4;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 25px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #fff;
+            font-size: 16px;
+        }
+
+        .nav-links a:hover {
+            color: #00bcd4;
+        }
+
+        /* شريط البحث والأزرار */
+        .search-container {
+            display: flex;
+            align-items: center;
+            background: #fff;
+            border-radius: 20px;
+            padding: 5px 15px;
+        }
+
+        .search-container input {
+            border: none;
+            outline: none;
+            padding: 5px;
+            font-size: 14px;
+            width: 220px;
+        }
+
+        .search-container i {
+            color: #00838f;
+            margin-right: 8px;
+        }
+
+        .btn-search {
+            background-color: #00838f;
+            color: white;
+            border: none;
+            padding: 6px 15px;
+            border-radius: 15px;
+            cursor: pointer;
+            margin-left: 5px;
+        }
+
+        .btn-clear {
+            background-color: #26a69a;
+            color: white;
+            border: none;
+            padding: 6px 15px;
+            border-radius: 15px;
+            cursor: pointer;
+            margin-left: 5px;
+        }
+
+        /* محتوى الصفحة الرئيسية (Task 3) */
+        .main-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 80px 50px;
+            height: calc(100vh - 70px);
+        }
+
+        .hero-section {
+            max-width: 600px;
+            background: rgba(0, 0, 0, 0.4);
+            padding: 30px;
+            border-radius: 10px;
+        }
+
+        .hero-section h1 {
+            font-size: 45px;
+            margin-bottom: 20px;
+            letter-spacing: 2px;
+        }
+
+        .hero-section p {
+            font-size: 15px;
+            line-height: 1.6;
+            margin-bottom: 25px;
+        }
+
+        .btn-book {
+            background-color: #00695c;
+            color: white;
+            padding: 10px 25px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        /* أيقونات السوشيال ميديا على الجانب */
+        .social-icons {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            background: rgba(11, 37, 51, 0.7);
+            padding: 15px 10px;
+            border-radius: 5px;
+        }
+
+        .social-icons a {
+            color: white;
+            font-size: 18px;
+            text-align: center;
+            transition: 0.3s;
+        }
+
+        .social-icons a:hover {
+            color: #00bcd4;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- شريط التنقل (Task 2) -->
+    <nav>
+        <div class="logo">
+            <i class="fa-solid fa-globe"></i> TravelBloom
+        </div>
+        <ul class="nav-links">
+            <li><a href="travel_recommendation.html">Home</a></li>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="contact.html">Contact Us</a></li>
+        </ul>
+        <div class="search-container">
+            <i class="fa-solid fa-search"></i>
+            <input type="text" id="conditionInput" placeholder="Enter a destination or keyword">
+            <button class="btn-search" id="btnSearch">Search</button>
+            <button class="btn-clear" id="btnClear">Clear</button>
+        </div>
+    </nav>
+
+    <!-- المحتوى الرئيسي (Task 3) -->
+    <div class="main-content">
+        <div class="hero-section">
+            <h1>EXPLORE DREAM DESTINATION</h1>
+            <p>The Travel Recommendation App helps users explore popular travel destinations through an interactive and user-friendly interface. It allows users to search for beaches, temples, countries, or specific country names to view related cities along with images and descriptions. The app dynamically fetches data from a structured JSON file to display relevant results. It provides a simple and efficient way to discover and plan travel destinations.</p>
+            <button class="btn-book">Book Now</button>
+        </div>
+
+        <!-- أيقونات وسائل التواصل الاجتماعي -->
+        <div class="social-icons">
+            <a href="#"><i class="fa-brands fa-twitter"></i></a>
+            <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+            <a href="#"><i class="fa-brands fa-instagram"></i></a>
+            <a href="#"><i class="fa-brands fa-youtube"></i></a>
+        </div>
+    </div>
+    <script src="travel_recommendation.js"></script>
+</body>
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - TravelBloom</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: Arial, sans-serif; }
+        body {
+            background-image: url('https://images.unsplash.com/photo-1496442226666-8d4d0e62e6e9?q=80&w=1920&auto=format&fit=crop');
+            background-size: cover; background-position: center; min-height: 100vh; color: #fff;
+        }
+        nav { display: flex; justify-content: space-between; align-items: center; background-color: #0b2533; padding: 15px 40px; }
+        .logo { display: flex; align-items: center; font-weight: bold; font-size: 20px; color: #fff; }
+        .logo i { margin-right: 10px; color: #00bcd4; }
+        .nav-links { list-style: none; display: flex; gap: 25px; }
+        .nav-links a { text-decoration: none; color: #fff; font-size: 16px; }
+        .nav-links a:hover { color: #00bcd4; }
+
+        .contact-container { display: flex; justify-content: space-between; padding: 60px 50px; align-items: center; }
+        .contact-info h1 { font-size: 45px; margin-bottom: 10px; letter-spacing: 2px; }
+        .contact-info p { font-size: 16px; color: #ddd; }
+
+        .contact-form { background: rgba(0, 0, 0, 0.6); padding: 30px; border-radius: 10px; width: 400px; display: flex; flex-direction: column; gap: 15px; }
+        .contact-form label { font-size: 14px; }
+        .contact-form input, .contact-form textarea {
+            background: transparent; border: 1px solid rgba(255, 255, 255, 0.4); padding: 10px; color: white; border-radius: 5px; outline: none;
+        }
+        .contact-form textarea { resize: vertical; height: 100px; }
+        .btn-submit { background-color: #00695c; color: white; padding: 10px; border: none; border-radius: 5px; cursor: pointer; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="logo"><i class="fa-solid fa-globe"></i> TravelBloom</div>
+        <ul class="nav-links">
+            <li><a href="travel_recommendation.html">Home</a></li>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="contact.html">Contact Us</a></li>
+        </ul>
+    </nav>
+
+    <div class="contact-container">
+        <div class="contact-info">
+            <h1>CONTACT US</h1>
+            <p>Get in touch</p>
+        </div>
+        <div class="contact-form">
+            <label>Name</label>
+            <input type="text" placeholder="Enter your name">
+            
+            <label>Email</label>
+            <input type="email" placeholder="Enter your email">
+            
+            <label>Message</label>
+            <textarea placeholder="Enter your message"></textarea>
+            
+            <button class="btn-submit">Submit</button>
+        </div>
+    </div>
+</body>
+</html>
