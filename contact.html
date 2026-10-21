@@ -1,63 +1,121 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact Us - TravelBloom</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: Arial, sans-serif; }
-        body {
-            background-image: url('https://images.unsplash.com/photo-1496442226666-8d4d0e62e6e9?q=80&w=1920&auto=format&fit=crop');
-            background-size: cover; background-position: center; min-height: 100vh; color: #fff;
-        }
-        nav { display: flex; justify-content: space-between; align-items: center; background-color: #0b2533; padding: 15px 40px; }
-        .logo { display: flex; align-items: center; font-weight: bold; font-size: 20px; color: #fff; }
-        .logo i { margin-right: 10px; color: #00bcd4; }
-        .nav-links { list-style: none; display: flex; gap: 25px; }
-        .nav-links a { text-decoration: none; color: #fff; font-size: 16px; }
-        .nav-links a:hover { color: #00bcd4; }
-
-        .contact-container { display: flex; justify-content: space-between; padding: 60px 50px; align-items: center; }
-        .contact-info h1 { font-size: 45px; margin-bottom: 10px; letter-spacing: 2px; }
-        .contact-info p { font-size: 16px; color: #ddd; }
-
-        .contact-form { background: rgba(0, 0, 0, 0.6); padding: 30px; border-radius: 10px; width: 400px; display: flex; flex-direction: column; gap: 15px; }
-        .contact-form label { font-size: 14px; }
-        .contact-form input, .contact-form textarea {
-            background: transparent; border: 1px solid rgba(255, 255, 255, 0.4); padding: 10px; color: white; border-radius: 5px; outline: none;
-        }
-        .contact-form textarea { resize: vertical; height: 100px; }
-        .btn-submit { background-color: #00695c; color: white; padding: 10px; border: none; border-radius: 5px; cursor: pointer; font-weight: bold; }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#102a2a">
+  <meta name="description" content="Get in touch with Altayeab about TravelBloom and your travel inspiration.">
+  <title>Contact — TravelBloom</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 </head>
 <body>
-    <nav>
-        <div class="logo"><i class="fa-solid fa-globe"></i> TravelBloom</div>
-        <ul class="nav-links">
-            <li><a href="travel_recommendation.html">Home</a></li>
-            <li><a href="about.html">About Us</a></li>
-            <li><a href="contact.html">Contact Us</a></li>
-        </ul>
-    </nav>
+  <div class="page-shell">
+    <header class="site-header">
+      <a class="brand" href="index.html" aria-label="TravelBloom home">
+        <span class="brand-mark"><i class="fa-solid fa-compass"></i></span>
+        <span>Travel<span class="brand-accent">Bloom</span></span>
+      </a>
+      <button class="menu-toggle" id="menuToggle" type="button" aria-label="Toggle navigation" aria-expanded="false">
+        <i class="fa-solid fa-bars"></i>
+      </button>
+      <nav class="main-nav" id="mainNav" aria-label="Main navigation">
+        <a class="nav-link" href="index.html">Home</a>
+        <a class="nav-link" href="about.html">About us</a>
+        <a class="nav-link active" href="contact.html" aria-current="page">Contact</a>
+      </nav>
+      <a class="header-cta" href="index.html#discover">Explore places <i class="fa-solid fa-arrow-right"></i></a>
+    </header>
 
-    <div class="contact-container">
-        <div class="contact-info">
-            <h1>CONTACT US</h1>
-            <p>Get in touch</p>
+    <main>
+      <section class="hero page-hero contact-hero" aria-labelledby="contactTitle">
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+          <p class="eyebrow"><span class="eyebrow-line"></span> LET'S CONNECT</p>
+          <h1 id="contactTitle">Have a place<br>in <em>mind?</em></h1>
+          <p class="hero-copy">Have a suggestion, a question, or a travel story to share? Send a note to Altayeab.</p>
+          <a class="primary-button" href="#contactForm">Write a message <i class="fa-solid fa-arrow-down"></i></a>
         </div>
-        <div class="contact-form">
-            <label>Name</label>
-            <input type="text" placeholder="Enter your name">
-            
-            <label>Email</label>
-            <input type="email" placeholder="Enter your email">
-            
-            <label>Message</label>
-            <textarea placeholder="Enter your message"></textarea>
-            
-            <button class="btn-submit">Submit</button>
+        <div class="hero-side-label"><span></span> GOOD THINGS START WITH HELLO</div>
+      </section>
+
+      <section class="discovery-section contact-content" aria-labelledby="contactHeading">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow eyebrow-dark">GET IN TOUCH</p>
+            <h2 id="contactHeading">We'd love to hear from you.</h2>
+            <p class="section-subtitle">Share your thoughts or tell us which destination we should feature next.</p>
+          </div>
+          <div class="heading-stamp"><i class="fa-regular fa-paper-plane"></i><span>Your next<br>idea starts here</span></div>
         </div>
-    </div>
+
+        <div class="contact-layout">
+          <aside class="contact-note">
+            <span class="about-card-icon"><i class="fa-solid fa-envelope"></i></span>
+            <h3>A note to Altayeab</h3>
+            <p>Use the form to share feedback, ask a question, or suggest a destination for TravelBloom.</p>
+            <div class="contact-detail"><i class="fa-solid fa-location-dot"></i><span>Travel inspiration, from wherever you are.</span></div>
+            <div class="contact-detail"><i class="fa-regular fa-clock"></i><span>We appreciate every message and suggestion.</span></div>
+          </aside>
+
+          <form class="contact-form" id="contactForm">
+            <div class="form-field">
+              <label for="contactName">Your name</label>
+              <input id="contactName" name="name" type="text" placeholder="e.g. Alex Morgan" autocomplete="name" required>
+            </div>
+            <div class="form-field">
+              <label for="contactEmail">Email address</label>
+              <input id="contactEmail" name="email" type="email" placeholder="you@example.com" autocomplete="email" required>
+            </div>
+            <div class="form-field">
+              <label for="contactMessage">Your message</label>
+              <textarea id="contactMessage" name="message" rows="5" placeholder="Tell us what's on your mind..." required></textarea>
+            </div>
+            <p class="form-note">Submitting opens your email app with the message addressed to ialtayeab@gmail.com. You will need to send it from your email app.</p>
+            <button class="search-button contact-submit" type="submit">Open email app <i class="fa-solid fa-arrow-right"></i></button>
+            <p class="form-status" id="formStatus" role="status" hidden></p>
+          </form>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <a class="brand footer-brand" href="index.html"><span class="brand-mark"><i class="fa-solid fa-compass"></i></span><span>Travel<span class="brand-accent">Bloom</span></span></a>
+      <p>Made for the places you haven't discovered yet.</p>
+      <span class="footer-credit">A demo project with room to grow in the future.</span>
+    </footer>
+  </div>
+  <script>
+    const menuToggle = document.getElementById("menuToggle");
+    const mainNav = document.getElementById("mainNav");
+    menuToggle.addEventListener("click", () => {
+      const isOpen = mainNav.classList.toggle("is-open");
+      menuToggle.setAttribute("aria-expanded", String(isOpen));
+      menuToggle.innerHTML = isOpen
+        ? '<i class="fa-solid fa-xmark"></i>'
+        : '<i class="fa-solid fa-bars"></i>';
+    });
+
+    document.getElementById("contactForm").addEventListener("submit", event => {
+      event.preventDefault();
+      const form = event.currentTarget;
+      const formData = new FormData(form);
+      const subject = `TravelBloom message from ${formData.get("name")}`;
+      const body = [
+        `Name: ${formData.get("name")}`,
+        `Email: ${formData.get("email")}`,
+        "",
+        "Message:",
+        formData.get("message")
+      ].join("\n");
+      const formStatus = document.getElementById("formStatus");
+      formStatus.textContent = "Your email app should open with the message prepared. Review it and press Send to deliver it.";
+      formStatus.hidden = false;
+      window.location.href = `mailto:ialtayeab@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    });
+  </script>
 </body>
 </html>

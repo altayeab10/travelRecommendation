@@ -1,102 +1,211 @@
-// Task 6: جلب البيانات والتأكد منها عبر console.log
-fetch('travel_recommendation_api.json')
-    .then(response => response.json())
-    .then(data => {
-        console.log('Fetched Data Successfully:', data);
-    })
-    .catch(error => console.error('Error loading API data:', error));
+// TravelBloom: destination search and result rendering.
+// Uses the existing travel_recommendation_api.json data structure.
+const searchForm = document.getElementById("searchForm");
+const searchInput = document.getElementById("conditionInput");
+const clearButton = document.getElementById("btnClear");
+const resultsContainer = document.getElementById("resultsContainer");
+const resultsMessage = document.getElementById("resultsMessage");
+const searchButton = document.getElementById("btnSearch");
+const menuToggle = document.getElementById("menuToggle");
+const mainNav = document.getElementById("mainNav");
 
-// Task 7 & 8: منطق البحث والنتائج عند الضغط على زر البحث
-document.getElementById('btnSearch').addEventListener('click', () => {
-    const searchInput = document.getElementById('conditionInput').value.toLowerCase().trim();
-    
-    if (!searchInput) return;
+let travelData = null;
 
-    fetch('travel_recommendation_api.json')
-        .then(response => response.json())
-        .then(data => {
-            let results = [];
+async function loadTravelData() {
+  if (travelData) return travelData;
 
-            // مطابقة الكلمات المفتاحية للشواطئ
-            if (searchInput === 'beach' || searchInput === 'beaches') {
-                results = data.beaches;
-            } 
-            // مطابقة الكلمات المفتاحية للمعابد
-            else if (searchInput === 'temple' || searchInput === 'temples') {
-                results = data.temples;
-            } 
-            // مطابقة الدول أو المدن
-            // مطابقة الكلمات المفتاحية للشواطئ
-            if (searchInput === 'beach' || searchInput === 'beaches') {
-                results = data.beaches;
-            } 
-            // مطابقة الكلمات المفتاحية للمعابد
-            else if (searchInput === 'temple' || searchInput === 'temples') {
-                results = data.temples;
-            } 
-            // مطابقة الكلمات المفتاحية للدول (مفرد أو جمع) أو اسم دولة محدد
-            else if (searchInput === 'country' || searchInput === 'countries') {
-                data.countries.forEach(country => {
-                    results = results.concat(country.cities);
-                });
-            } 
-            // البحث باسم دولة معينة أو مدينة
-            else {
-                data.countries.forEach(country => {
-                    if (country.name.toLowerCase().includes(searchInput)) {
-                        results = results.concat(country.cities);
-                    } else {
-                        country.cities.forEach(city => {
-                            if (city.name.toLowerCase().includes(searchInput)) {
-                                results.push(city);
-                            }
-                        });
-                    }
-                });
-            }
+  const response = await fetch("travel_recommendation_api.json");
+  if (!response.ok) {
+    throw new Error(`Could not load destination data (${response.status}).`);
+  }
 
-            displayResults(results);
-        });
-});
-
-// Task 9: زر مسح النتائج (Clear)
-document.getElementById('btnClear').addEventListener('click', () => {
-    document.getElementById('conditionInput').value = '';
-    const resultsContainer = document.getElementById('resultsContainer');
-    if (resultsContainer) {
-        resultsContainer.innerHTML = '';
-        resultsContainer.style.display = 'none';
-    }
-});
-
-// دالة عرض النتائج بتنسيق Grid (Task 8)
-function displayResults(results) {
-    let container = document.getElementById('resultsContainer');
-    if (!container) {
-        container = document.createElement('div');
-        container.id = 'resultsContainer';
-        // استخدام Grid كما هو مطلوب في التعليمات لتظهر النتائج بجانب بعضها
-        container.style.cssText = "position: absolute; top: 100px; left: 50%; transform: translateX(-50%); width: 80%; max-width: 900px; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; background: rgba(11,37,51,0.95); padding: 25px; border-radius: 10px; color: white; z-index: 1000;";
-        document.body.appendChild(container);
-    }
-    
-    container.style.display = 'grid';
-    container.innerHTML = '';
-    
-    if (results.length === 0) {
-        container.innerHTML = '<p style="grid-column: 1/-1; text-align: center;">No results found.</p>';
-        return;
-    }
-
-    results.forEach(item => {
-        const card = document.createElement('div');
-        card.style.cssText = "background: rgba(0,0,0,0.5); border-radius: 8px; overflow: hidden; padding: 15px; display: flex; flex-direction: column; gap: 10px;";
-        
-        card.innerHTML = `
-            <img src="${item.imageUrl}" alt="${item.name}" style="width: 100%; height: 150px; object-fit: cover; border-radius: 5px;">
-            <h3 style="font-size: 16px; color: #00bcd4;">${item.name}</h3>
-            <p style="font-size: 13px; line-height: 1.4; color: #ddd;">${item.description}</p>
-        `;
-        container.appendChild(card);
-    });
+  travelData = await response.json();
+  return travelData;
 }
+
+function normalizeText(value) {
+  return String(value ?? "").toLowerCase().trim();
+}
+
+function findDestinations(data, query) {
+  const normalizedQuery = normalizeText(query);
+  if (!normalizedQuery) return [];
+
+  const beaches = Array.isArray(data.beaches) ? data.beaches : [];
+  const mosques = Array.isArray(data.mosques) ? data.mosques : [];
+  const countries = Array.isArray(data.countries) ? data.countries : [];
+  const allCities = countries.flatMap(country => Array.isArray(country.cities) ? country.cities : []);
+
+  if (["beach", "beaches"].includes(normalizedQuery)) return beaches;
+  if (["mosque", "mosques"].includes(normalizedQuery)) return mosques;
+  if (["country", "countries"].includes(normalizedQuery)) return allCities;
+
+  const matchingCities = [];
+  countries.forEach(country => {
+    const countryName = normalizeText(country.name);
+    const cities = Array.isArray(country.cities) ? country.cities : [];
+
+    if (countryName.includes(normalizedQuery)) {
+      matchingCities.push(...cities);
+      return;
+    }
+
+    cities.forEach(city => {
+      const cityName = normalizeText(city.name);
+      const description = normalizeText(city.description);
+      if (cityName.includes(normalizedQuery) || description.includes(normalizedQuery)) {
+        matchingCities.push(city);
+      }
+    });
+  });
+
+  // Also allow searching for the name of a beach or mosque.
+  const matchingSpecialPlaces = [...beaches, ...mosques].filter(place =>
+    normalizeText(place.name).includes(normalizedQuery) ||
+    normalizeText(place.description).includes(normalizedQuery)
+  );
+
+  return [...matchingCities, ...matchingSpecialPlaces];
+}
+
+function setMessage(title, description, type = "") {
+  resultsMessage.className = `results-message ${type}`.trim();
+  resultsMessage.replaceChildren();
+
+  const icon = document.createElement("span");
+  icon.className = "message-icon";
+  const iconElement = document.createElement("i");
+  iconElement.className = type === "error-message"
+    ? "fa-solid fa-triangle-exclamation"
+    : "fa-regular fa-map";
+  icon.appendChild(iconElement);
+
+  const textWrap = document.createElement("div");
+  const heading = document.createElement("strong");
+  heading.textContent = title;
+  const paragraph = document.createElement("p");
+  paragraph.textContent = description;
+  textWrap.append(heading, paragraph);
+  resultsMessage.append(icon, textWrap);
+  resultsMessage.hidden = false;
+}
+
+function createDestinationCard(place, index) {
+  const card = document.createElement("article");
+  card.className = "destination-card";
+  card.style.animationDelay = `${Math.min(index * 70, 350)}ms`;
+
+  const imageWrap = document.createElement("div");
+  imageWrap.className = "destination-image-wrap";
+
+  const image = document.createElement("img");
+  image.className = "destination-image";
+  image.loading = "lazy";
+  image.alt = place.name ? `View of ${place.name}` : "Travel destination";
+  image.src = place.imageUrl || "";
+  image.addEventListener("error", () => {
+    imageWrap.style.background = "linear-gradient(135deg, #dbe7dc, #a9c2b1)";
+    image.removeAttribute("src");
+    image.alt = "Image unavailable for this destination";
+  }, { once: true });
+
+  const tag = document.createElement("span");
+  tag.className = "destination-tag";
+  tag.textContent = "DESTINATION";
+  imageWrap.append(image, tag);
+
+  const copy = document.createElement("div");
+  copy.className = "destination-copy";
+  const title = document.createElement("h3");
+  title.textContent = place.name || "Untitled destination";
+  const description = document.createElement("p");
+  description.textContent = place.description || "Discover more about this beautiful place.";
+  copy.append(title, description);
+
+  card.append(imageWrap, copy);
+  return card;
+}
+
+function displayResults(results, query) {
+  resultsContainer.replaceChildren();
+
+  if (!results.length) {
+    setMessage(
+      "No destinations found just yet.",
+      `We couldn't find a match for “${query}”. Try “beaches”, “mosques”, “countries”, or a city name.`
+    );
+    return;
+  }
+
+  resultsMessage.hidden = true;
+  const count = document.createElement("p");
+  count.className = "results-count";
+  count.textContent = `${results.length} ${results.length === 1 ? "place" : "places"} found for “${query}”`;
+  resultsContainer.appendChild(count);
+
+  const grid = document.createElement("div");
+  grid.className = "results-grid";
+  results.forEach((place, index) => grid.appendChild(createDestinationCard(place, index)));
+  resultsContainer.appendChild(grid);
+}
+
+async function performSearch(query) {
+  const cleanQuery = query.trim();
+  if (!cleanQuery) {
+    searchInput.focus();
+    setMessage("Start with a destination or category.", "Try “beaches”, “mosques”, “countries”, or a place name.");
+    return;
+  }
+
+  searchButton.disabled = true;
+  searchButton.innerHTML = 'Searching <i class="fa-solid fa-spinner fa-spin"></i>';
+  resultsContainer.replaceChildren();
+  setMessage("Finding places for you…", "Loading travel recommendations.", "loading-message");
+
+  try {
+    const data = await loadTravelData();
+    const results = findDestinations(data, cleanQuery);
+    displayResults(results, cleanQuery);
+  } catch (error) {
+    console.error("TravelBloom search error:", error);
+    setMessage(
+      "We couldn't load destinations.",
+      "Please run the project with VS Code Live Server and try again.",
+      "error-message"
+    );
+  } finally {
+    searchButton.disabled = false;
+    searchButton.innerHTML = 'Search places <i class="fa-solid fa-arrow-right"></i>';
+  }
+}
+
+searchForm.addEventListener("submit", event => {
+  event.preventDefault();
+  performSearch(searchInput.value);
+});
+
+clearButton.addEventListener("click", () => {
+  searchInput.value = "";
+  resultsContainer.replaceChildren();
+  setMessage(
+    "Your next favorite place is out there.",
+    "Start with a search above, or choose one of the popular categories."
+  );
+  searchInput.focus();
+});
+
+document.querySelectorAll(".search-chip").forEach(chip => {
+  chip.addEventListener("click", () => {
+    const query = chip.dataset.query || "";
+    searchInput.value = query;
+    performSearch(query);
+  });
+});
+
+menuToggle.addEventListener("click", () => {
+  const isOpen = mainNav.classList.toggle("is-open");
+  menuToggle.setAttribute("aria-expanded", String(isOpen));
+  menuToggle.innerHTML = isOpen
+    ? '<i class="fa-solid fa-xmark"></i>'
+    : '<i class="fa-solid fa-bars"></i>';
+});

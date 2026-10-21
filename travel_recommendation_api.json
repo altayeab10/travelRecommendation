@@ -49,18 +49,18 @@
         ]
       }
     ],
-    "temples": [
+    "mosques": [
         {
             "id": 1,
-            "name": "Angkor Wat, Cambodia",
-            "imageUrl": "https://images.unsplash.com/photo-1546708973-b339540b5162",
-            "description": "A UNESCO World Heritage site and the largest religious monument in the world."
+            "name": "Masjid al-Haram, Mecca",
+            "imageUrl": "https://images.unsplash.com/photo-1564769625905-50e93615e769?auto=format&fit=crop&w=900&q=80",
+            "description": "The Grand Mosque surrounds the Kaaba and is Islam's holiest site, welcoming millions of visitors each year."
           },
       {
         "id": 2,
-        "name": "Taj Mahal, India",
-        "imageUrl": "https://images.unsplash.com/photo-1564507592333-c60657eea523",
-        "description": "An iconic symbol of love and a masterpiece of Mughal architecture."
+        "name": "Sheikh Zayed Grand Mosque, Abu Dhabi",
+        "imageUrl": "https://images.unsplash.com/photo-1584551246679-0daf3d275d0f?auto=format&fit=crop&w=900&q=80",
+        "description": "A landmark mosque in Abu Dhabi, known for its white marble architecture, grand domes, and reflective courtyard."
       }
     ],
     "beaches": [

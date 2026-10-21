@@ -1,205 +1,103 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TravelBloom - Recommendations</title>
-    <!-- روابط أيقونات FontAwesome لوسائل التواصل الاجتماعي وأيقونة البحث -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: Arial, sans-serif;
-        }
-
-        /* خلفية الصفحة الرئيسية */
-        body {
-            background-image: url('https://images.unsplash.com/photo-1496442226666-8d4d0e62e6e9?q=80&w=1920&auto=format&fit=crop');
-            background-size: cover;
-            background-position: center;
-            height: 100vh;
-            color: #fff;
-        }
-
-        /* شريط التنقل (Task 2) */
-        nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background-color: #0b2533;
-            padding: 15px 40px;
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            font-weight: bold;
-            font-size: 20px;
-            color: #fff;
-        }
-
-        .logo i {
-            margin-right: 10px;
-            color: #00bcd4;
-        }
-
-        .nav-links {
-            list-style: none;
-            display: flex;
-            gap: 25px;
-        }
-
-        .nav-links a {
-            text-decoration: none;
-            color: #fff;
-            font-size: 16px;
-        }
-
-        .nav-links a:hover {
-            color: #00bcd4;
-        }
-
-        /* شريط البحث والأزرار */
-        .search-container {
-            display: flex;
-            align-items: center;
-            background: #fff;
-            border-radius: 20px;
-            padding: 5px 15px;
-        }
-
-        .search-container input {
-            border: none;
-            outline: none;
-            padding: 5px;
-            font-size: 14px;
-            width: 220px;
-        }
-
-        .search-container i {
-            color: #00838f;
-            margin-right: 8px;
-        }
-
-        .btn-search {
-            background-color: #00838f;
-            color: white;
-            border: none;
-            padding: 6px 15px;
-            border-radius: 15px;
-            cursor: pointer;
-            margin-left: 5px;
-        }
-
-        .btn-clear {
-            background-color: #26a69a;
-            color: white;
-            border: none;
-            padding: 6px 15px;
-            border-radius: 15px;
-            cursor: pointer;
-            margin-left: 5px;
-        }
-
-        /* محتوى الصفحة الرئيسية (Task 3) */
-        .main-content {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 80px 50px;
-            height: calc(100vh - 70px);
-        }
-
-        .hero-section {
-            max-width: 600px;
-            background: rgba(0, 0, 0, 0.4);
-            padding: 30px;
-            border-radius: 10px;
-        }
-
-        .hero-section h1 {
-            font-size: 45px;
-            margin-bottom: 20px;
-            letter-spacing: 2px;
-        }
-
-        .hero-section p {
-            font-size: 15px;
-            line-height: 1.6;
-            margin-bottom: 25px;
-        }
-
-        .btn-book {
-            background-color: #00695c;
-            color: white;
-            padding: 10px 25px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-weight: bold;
-            text-transform: uppercase;
-        }
-
-        /* أيقونات السوشيال ميديا على الجانب */
-        .social-icons {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-            background: rgba(11, 37, 51, 0.7);
-            padding: 15px 10px;
-            border-radius: 5px;
-        }
-
-        .social-icons a {
-            color: white;
-            font-size: 18px;
-            text-align: center;
-            transition: 0.3s;
-        }
-
-        .social-icons a:hover {
-            color: #00bcd4;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#102a2a">
+  <meta name="description" content="Discover inspiring destinations, beaches, mosques, and cities with TravelBloom.">
+  <title>TravelBloom — Find your next escape</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 </head>
 <body>
+  <div class="page-shell">
+    <header class="site-header">
+      <a class="brand" href="index.html" aria-label="TravelBloom home">
+        <span class="brand-mark"><i class="fa-solid fa-compass"></i></span>
+        <span>Travel<span class="brand-accent">Bloom</span></span>
+      </a>
 
-    <!-- شريط التنقل (Task 2) -->
-    <nav>
-        <div class="logo">
-            <i class="fa-solid fa-globe"></i> TravelBloom
-        </div>
-        <ul class="nav-links">
-            <li><a href="travel_recommendation.html">Home</a></li>
-            <li><a href="about.html">About Us</a></li>
-            <li><a href="contact.html">Contact Us</a></li>
-        </ul>
-        <div class="search-container">
-            <i class="fa-solid fa-search"></i>
-            <input type="text" id="conditionInput" placeholder="Enter a destination or keyword">
-            <button class="btn-search" id="btnSearch">Search</button>
-            <button class="btn-clear" id="btnClear">Clear</button>
-        </div>
-    </nav>
+      <button class="menu-toggle" id="menuToggle" type="button" aria-label="Toggle navigation" aria-expanded="false">
+        <i class="fa-solid fa-bars"></i>
+      </button>
 
-    <!-- المحتوى الرئيسي (Task 3) -->
-    <div class="main-content">
-        <div class="hero-section">
-            <h1>EXPLORE DREAM DESTINATION</h1>
-            <p>The Travel Recommendation App helps users explore popular travel destinations through an interactive and user-friendly interface. It allows users to search for beaches, temples, countries, or specific country names to view related cities along with images and descriptions. The app dynamically fetches data from a structured JSON file to display relevant results. It provides a simple and efficient way to discover and plan travel destinations.</p>
-            <button class="btn-book">Book Now</button>
+      <nav class="main-nav" id="mainNav" aria-label="Main navigation">
+        <a class="nav-link active" href="index.html">Home</a>
+        <a class="nav-link" href="about.html">About us</a>
+        <a class="nav-link" href="contact.html">Contact</a>
+      </nav>
+
+      <a class="header-cta" href="#discover">Explore places <i class="fa-solid fa-arrow-right"></i></a>
+    </header>
+
+    <main>
+      <section class="hero" aria-labelledby="heroTitle">
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+          <p class="eyebrow"><span class="eyebrow-line"></span> YOUR NEXT CHAPTER STARTS HERE</p>
+          <h1 id="heroTitle">Find the place<br>that <em>moves you.</em></h1>
+          <p class="hero-copy">From sun-soaked coastlines to magnificent mosques, discover destinations that make you want to pack your bags.</p>
+          <a class="primary-button" href="#discover">Discover destinations <i class="fa-solid fa-arrow-down"></i></a>
+          <div class="hero-note">
+            <span class="note-icon"><i class="fa-solid fa-earth-americas"></i></span>
+            <span><strong>Made for curious travelers</strong><small>Find inspiration for your next escape</small></span>
+          </div>
+        </div>
+        <div class="hero-side-label"><span></span> COLLECT MOMENTS, NOT THINGS</div>
+      </section>
+
+      <section class="discovery-section" id="discover" aria-labelledby="discoverTitle">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow eyebrow-dark">LET THE JOURNEY BEGIN</p>
+            <h2 id="discoverTitle">Where would you like to go?</h2>
+            <p class="section-subtitle">Search a destination or choose a category to get inspired.</p>
+          </div>
+          <div class="heading-stamp"><i class="fa-regular fa-compass"></i><span>Explore<br>the world</span></div>
         </div>
 
-        <!-- أيقونات وسائل التواصل الاجتماعي -->
-        <div class="social-icons">
-            <a href="#"><i class="fa-brands fa-twitter"></i></a>
-            <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
-            <a href="#"><i class="fa-brands fa-instagram"></i></a>
-            <a href="#"><i class="fa-brands fa-youtube"></i></a>
+        <form class="search-panel" id="searchForm">
+          <label class="search-field" for="conditionInput">
+            <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+            <span class="visually-hidden">Search destinations</span>
+            <input type="search" id="conditionInput" placeholder="Try “beaches”, “mosques”, or a country..." autocomplete="off">
+          </label>
+          <button class="search-button" id="btnSearch" type="submit">Search places <i class="fa-solid fa-arrow-right"></i></button>
+          <button class="clear-button" id="btnClear" type="button">Clear</button>
+        </form>
+
+        <div class="quick-searches" aria-label="Popular searches">
+          <span>Popular:</span>
+          <button type="button" class="search-chip" data-query="beaches"><i class="fa-solid fa-umbrella-beach"></i> Beaches</button>
+          <button type="button" class="search-chip" data-query="mosques"><i class="fa-solid fa-landmark"></i> Mosques</button>
+          <button type="button" class="search-chip" data-query="countries"><i class="fa-solid fa-earth-americas"></i> Countries</button>
         </div>
-    </div>
-    <script src="travel_recommendation.js"></script>
+
+        <div class="results-area" id="resultsArea" aria-live="polite">
+          <div class="results-message" id="resultsMessage">
+            <span class="message-icon"><i class="fa-regular fa-map"></i></span>
+            <div><strong>Your next favorite place is out there.</strong><p>Start with a search above, or choose one of the popular categories.</p></div>
+          </div>
+          <div class="results-container" id="resultsContainer"></div>
+        </div>
+      </section>
+
+      <section class="inspiration-strip" aria-label="Travel inspiration">
+        <div class="strip-icon"><i class="fa-solid fa-sun"></i></div>
+        <div><p class="eyebrow">A LITTLE INSPIRATION</p><h2>The world is bigger than your routine.</h2></div>
+        <a href="#discover">Find your escape <i class="fa-solid fa-arrow-right"></i></a>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <a class="brand footer-brand" href="index.html"><span class="brand-mark"><i class="fa-solid fa-compass"></i></span><span>Travel<span class="brand-accent">Bloom</span></span></a>
+      <p>Made for the places you haven't discovered yet.</p>
+      <span class="footer-credit">A demo project with room to grow in the future.</span>
+    </footer>
+  </div>
+  <script src="travel_recommendation.js"></script>
 </body>
 </html>
