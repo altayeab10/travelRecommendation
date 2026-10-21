@@ -12,7 +12,7 @@
   --shadow: 0 18px 55px rgba(20, 48, 43, .10);
 }
 * { box-sizing: border-box; }
-html { scroll-behavior: smooth; }
+html { scroll-behavior: smooth; scroll-padding-top: 16px; }
 body {
   margin: 0;
   color: var(--ink);
@@ -38,7 +38,8 @@ button:focus-visible, a:focus-visible, input:focus-visible { outline: 3px solid 
 .nav-link.active::after { content: ""; display: block; height: 2px; margin-top: 7px; background: var(--orange); border-radius: 2px; }
 .header-cta { display: inline-flex; align-items: center; gap: 12px; background: var(--green); color: white; padding: 13px 17px; border-radius: 5px; font-size: 12px; font-weight: 700; transition: background .2s, transform .2s; }
 .header-cta:hover, .primary-button:hover, .search-button:hover { background: #236657; transform: translateY(-1px); }
-.menu-toggle { display: none; border: 0; background: transparent; color: var(--ink); font-size: 21px; cursor: pointer; }
+.menu-toggle { display: none; place-items: center; width: 44px; height: 44px; border: 0; border-radius: 5px; background: transparent; color: var(--ink); font-size: 21px; cursor: pointer; }
+.menu-toggle:hover { background: #eaf0e8; }
 
 .hero {
   min-height: 590px; position: relative; display: flex; align-items: center; padding: 75px clamp(22px, 8vw, 118px);
@@ -160,22 +161,26 @@ button:focus-visible, a:focus-visible, input:focus-visible { outline: 3px solid 
   .contact-note, .contact-form { padding: 22px; }
 }
 @media (max-width: 680px) {
-  .site-header { min-height: 72px; flex-wrap: wrap; padding: 0 20px; }
+  .site-header { min-height: 72px; flex-wrap: wrap; gap: 8px; padding: 0 16px; }
   .brand { font-size: 19px; }
-  .menu-toggle { display: block; margin-left: auto; }
+  .menu-toggle { display: grid; margin-left: auto; }
   .header-cta { display: none; }
-  .main-nav { display: none; order: 3; width: 100%; padding: 0 0 17px; }
-  .main-nav.is-open { display: flex; }
-  .nav-link.active::after { margin-top: 4px; }
-  .hero { min-height: 590px; padding: 63px 24px; background-position: 58% center; }
-  .page-hero { min-height: 460px; }
+  .main-nav { display: none; order: 3; width: 100%; padding: 0 0 14px; }
+  .main-nav.is-open { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 6px; }
+  .nav-link { padding: 10px 4px; border-radius: 4px; text-align: center; }
+  .nav-link:hover, .nav-link.active { background: #eaf0e8; }
+  .nav-link.active::after { width: 24px; margin: 5px auto 0; }
+  .hero { min-height: 540px; padding: 54px 22px; background-position: 58% center; }
+  .page-hero { min-height: 420px; }
   .page-hero .hero-content { max-width: 100%; }
+  .page-hero h1 { font-size: clamp(42px, 11vw, 58px); }
   .about-content, .contact-content { padding-top: 55px; }
   .about-grid, .contact-layout { grid-template-columns: 1fr; }
   .about-grid { gap: 13px; }
   .about-card { padding: 22px; }
   .contact-note, .contact-form { padding: 22px; }
   .contact-submit { width: 100%; }
+  .form-field input, .form-field textarea { font-size: 16px; }
   .hero-overlay { background: linear-gradient(90deg, rgba(12, 36, 32, .88), rgba(12, 36, 32, .48)); }
   .hero h1 { font-size: clamp(46px, 12vw, 67px); letter-spacing: -1.5px; }
   .hero-copy { font-size: 14px; }
@@ -193,10 +198,26 @@ button:focus-visible, a:focus-visible, input:focus-visible { outline: 3px solid 
   .destination-image-wrap { height: 220px; }
   .inspiration-strip { align-items: flex-start; flex-wrap: wrap; margin: 0 20px 48px; padding: 22px; }
   .strip-icon { flex-basis: 42px; width: 42px; height: 42px; }
-  .inspiration-strip > div:nth-child(2) { flex: 1; min-width: 170px; }
+  .inspiration-strip > div:nth-child(2) { flex: 1; min-width: 0; }
   .inspiration-strip > a { margin-left: 61px; }
   .site-footer { flex-wrap: wrap; padding: 23px 20px; }
   .site-footer p { order: 3; flex-basis: 100%; margin: 0; }
+  .footer-credit { max-width: 150px; text-align: right; line-height: 1.6; }
+}
+@media (max-width: 380px) {
+  .site-header { padding-right: 12px; padding-left: 12px; }
+  .brand { gap: 7px; font-size: 18px; }
+  .brand-mark { width: 33px; height: 33px; }
+  .hero { padding-right: 18px; padding-left: 18px; }
+  .hero h1 { font-size: 44px; }
+  .discovery-section { padding-right: 16px; padding-left: 16px; }
+  .section-heading h2 { font-size: 29px; }
+  .results-message { align-items: flex-start; gap: 12px; padding: 17px; }
+  .message-icon { flex-basis: 38px; height: 38px; }
+  .results-message strong { font-size: 16px; }
+  .inspiration-strip { margin-right: 16px; margin-left: 16px; padding: 18px; }
+  .inspiration-strip > a { margin-left: 0; }
+  .site-footer { padding-right: 16px; padding-left: 16px; }
 }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
