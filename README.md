@@ -1,6 +1,6 @@
 # TravelBloom
 
-TravelBloom is a responsive travel-discovery demo that helps curious travelers find destination inspiration. Search for a country or city, or browse recommendations for beaches, mosques, and cities.
+TravelBloom is a responsive travel-discovery demo created by Altayeab. It helps curious travelers find destination inspiration: search for a country or city, or browse recommendations for beaches, mosques, and cities.
 
 **Live demo:** [altayeab10.github.io/travelRecommendation](https://altayeab10.github.io/travelRecommendation/)
 
@@ -11,6 +11,7 @@ TravelBloom is a responsive travel-discovery demo that helps curious travelers f
 - Browse beach, mosque, and country recommendations.
 - About and Contact pages that share the same visual design.
 - Contact form that prepares an email to the project owner using the visitor's email app.
+- Accessible page landmarks, labels, and status messages for search and contact interactions.
 
 ## Built with
 
@@ -50,6 +51,46 @@ Open the local URL shown in the terminal.
 | `style.css` | Shared styles, responsive layouts, and mobile navigation presentation |
 | `travel_recommendation.js` | Destination search, JSON loading, and result rendering |
 | `travel_recommendation_api.json` | Destination, city, beach, and mosque recommendation data |
+
+## How the code works
+
+### Destination search
+
+1. `index.html` provides the search form, popular-category buttons, and an empty results area.
+2. `travel_recommendation.js` listens for form submissions and category-button clicks. Both use the same `performSearch()` flow.
+3. `loadTravelData()` fetches `travel_recommendation_api.json` the first time and reuses the parsed data for later searches.
+4. `findDestinations()` normalizes the query, handles category shortcuts, then searches country, city, and place names or descriptions.
+5. `displayResults()` updates the live results area. `createDestinationCard()` builds each result with DOM methods and text content.
+
+Category shortcuts are `beaches`, `mosques`, and `countries`. Searching for a country returns its cities; searching by city or place can match names and descriptions.
+
+### Recommendation data structure
+
+The JSON file has three top-level categories: `countries`, `beaches`, and `mosques`. Countries contain a `cities` array; every displayed place has a `name`, `imageUrl`, and `description`.
+
+```json
+{
+  "name": "Example destination",
+  "imageUrl": "https://example.com/destination.jpg",
+  "description": "A short description of the destination."
+}
+```
+
+Add a place to the appropriate category in `travel_recommendation_api.json`. If introducing a new searchable category, update both its shortcut and the matching-place search in `findDestinations()` in `travel_recommendation.js`.
+
+### Responsive layout
+
+`style.css` contains shared components and three responsive breakpoints:
+
+- At `900px`, navigation spacing tightens, result cards become two columns, and the contact layout narrows.
+- At `680px`, navigation becomes a collapsible menu, content grids stack, search controls wrap, and the destination grid becomes one column.
+- At `380px`, compact-phone spacing and typography are adjusted further.
+
+The mobile menu button in each HTML page toggles the `is-open` class on the navigation and updates its `aria-expanded` state. Contact form fields use a larger mobile text size to prevent browsers from zooming when a field receives focus.
+
+### Contact form behavior
+
+The form validates required name, email, and message fields in the browser. On submission, `contact.html` builds a `mailto:` link with the form values encoded in its subject and body. This opens the visitor's configured email app; it does not send data to a server.
 
 ## Update recommendation data
 

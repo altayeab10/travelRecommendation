@@ -12,6 +12,7 @@ const mainNav = document.getElementById("mainNav");
 let travelData = null;
 
 async function loadTravelData() {
+  // Keep the successful response in memory so each search doesn't fetch JSON again.
   if (travelData) return travelData;
 
   const response = await fetch("travel_recommendation_api.json");
@@ -31,6 +32,7 @@ function findDestinations(data, query) {
   const normalizedQuery = normalizeText(query);
   if (!normalizedQuery) return [];
 
+  // Category shortcuts take precedence over the broader name and description search.
   const beaches = Array.isArray(data.beaches) ? data.beaches : [];
   const mosques = Array.isArray(data.mosques) ? data.mosques : [];
   const countries = Array.isArray(data.countries) ? data.countries : [];
@@ -46,6 +48,7 @@ function findDestinations(data, query) {
     const cities = Array.isArray(country.cities) ? country.cities : [];
 
     if (countryName.includes(normalizedQuery)) {
+      // A country match returns every city in that country.
       matchingCities.push(...cities);
       return;
     }
@@ -104,6 +107,7 @@ function createDestinationCard(place, index) {
   image.alt = place.name ? `View of ${place.name}` : "Travel destination";
   image.src = place.imageUrl || "";
   image.addEventListener("error", () => {
+    // Keep the card readable if a third-party image URL stops working.
     imageWrap.style.background = "linear-gradient(135deg, #dbe7dc, #a9c2b1)";
     image.removeAttribute("src");
     image.alt = "Image unavailable for this destination";
@@ -196,6 +200,7 @@ clearButton.addEventListener("click", () => {
 
 document.querySelectorAll(".search-chip").forEach(chip => {
   chip.addEventListener("click", () => {
+    // Reuse the same search flow for category chips and typed queries.
     const query = chip.dataset.query || "";
     searchInput.value = query;
     performSearch(query);
